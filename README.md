@@ -14,7 +14,7 @@
 A single-page marketing site that works as the **brand and local-SEO front door** for a
 physical shop, and funnels every visitor into the client's existing Shopify store.
 
-**Live:** [landing.amaartesana.com](https://landing.amaartesana.com) → store: [amaartesana.com](https://amaartesana.com)
+**Live:** [landing.amaartesana.com](https://amaartesana.vercel.app/) → store: [amaartesana.com](https://amaartesana.com)
 
 ---
 
