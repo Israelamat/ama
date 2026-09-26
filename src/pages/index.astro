@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Ticker from '../components/Ticker.astro';
+import Manifesto from '../components/Manifesto.astro';
+import Collections from '../components/Collections.astro';
+import LocalSeo from '../components/LocalSeo.astro';
+import Services from '../components/Services.astro';
+import Learn from '../components/Learn.astro';
+import Faq from '../components/Faq.astro';
+import Visit from '../components/Visit.astro';
+import Footer from '../components/Footer.astro';
+import HandoffOverlay from '../components/HandoffOverlay.astro';
+
+const title = 'Herbolario en Petrer · Productos naturales y dietética | Ama';
+const description =
+  'Herbolario y herbolistería en Petrer: plantas medicinales, infusiones, suplementos, vitaminas y cosmética natural. Tienda de productos naturales, cerca de Elda.';
+---
+
+<Base title={title} description={description}>
+  <Header />
+
+  <main id="contenido">
+    <Hero />
+    <Ticker />
+    <Manifesto />
+    <Collections />
+    <LocalSeo />
+    <Services />
+    <Learn />
+    <Faq />
+    <Visit />
+  </main>
+
+  <Footer />
+  <HandoffOverlay />
+</Base>
+
+<script>
+  import '../scripts/motion';
+  import '../scripts/ui';
+</script>

@@ -1,0 +1,77 @@
+---
+import SectionHead from './SectionHead.astro';
+import { links, values } from '../config/site';
+
+const proposito =
+  'Que las personas conozcan y acepten que sus vidas son maravillosas y encuentren el gran poder de ser felices, generando así un gran cambio. Acercar la fuente de amor incondicional, con su luz y esperanza, a la vida.';
+
+// La cita se trocea en palabras en el servidor: el reveal usa `--i` desde el
+// HTML, así que ya no hace falta que JS reescriba el `innerHTML` del bloque
+// (lo que además rompía el texto para lectores de pantalla y copiado).
+const cita =
+  'Que el mundo espiritual se vea sin miedo y con toda la claridad que la luz desprende.';
+const palabras = cita.split(' ');
+const mision =
+  'Estamos al servicio de ayuda y guía de las personas con sensibilidad alta, enseñando con claridad todas las ayudas que existen para salir de las emociones dañinas: nuestras terapias, masajes energéticos, nuestras clases y la venta de productos naturales, esotéricos, minerales, velas y amuletos.';
+---
+
+<section id="manifiesto" class="section-pad relative overflow-hidden">
+  <div
+    class="halo -left-40 top-1/4 h-[460px] w-[460px]"
+    style="--halo-tint: #bdf2eb; opacity: 0.35"
+    aria-hidden="true"
+  ></div>
+
+  <div class="wrap relative">
+    <SectionHead
+      kicker="Manifiesto"
+      title="Aprende y vive. Sabemos que todo es emoción."
+      id="manifiesto-title"
+      lede="Si nuestras emociones están en negativo, ¿cómo las variamos? No te preocupes: te damos herramientas para transformarlas y aceptarlas. Sé valiente y actúa."
+    />
+
+    <blockquote class="mx-auto mt-20 max-w-4xl text-center" data-reveal-words>
+      <p class="font-display text-[clamp(1.7rem,4.6vw,3.4rem)] leading-[1.18] tracking-[-0.01em] text-ink">
+        «
+        {palabras.map((palabra, index) => (
+          <span style={`--i: ${index}`}>{palabra}&nbsp;</span>
+        ))}
+        »
+      </p>
+    </blockquote>
+
+    <div class="mt-20 grid gap-10 lg:mt-24 lg:grid-cols-2 lg:gap-16">
+      <div class="card p-8 sm:p-10" data-reveal>
+        <p class="kicker">Nuestro propósito</p>
+        <h3 class="display-md mt-4">Acercar la fuente de amor incondicional</h3>
+        <p class="mt-5 leading-relaxed text-ink-70">{proposito}</p>
+      </div>
+      <div class="card p-8 sm:p-10 lg:mt-14" data-reveal style="--reveal-delay: 100ms">
+        <p class="kicker">Nuestra misión</p>
+        <h3 class="display-md mt-4">Al servicio de tu felicidad</h3>
+        <p class="mt-5 leading-relaxed text-ink-70">{mision}</p>
+      </div>
+    </div>
+
+    <ul class="mt-14 grid gap-6 sm:grid-cols-3">
+      {values.map((value, index) => (
+        <li class="card p-7" data-reveal style={`--reveal-delay: ${index * 80}ms`}>
+          <span class="font-meta text-[0.7rem] font-black tracking-[0.24em] text-mint">
+            0{index + 1}
+          </span>
+          <h3 class="mt-4 text-2xl">{value.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-ink-70">{value.text}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-14 flex justify-center" data-reveal>
+      <a href={links.sobreNosotras} data-shop-link class="btn btn-ghost">
+        Leer más sobre nosotras
+        <span class="btn-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    </div>
+  </div>
+</section>

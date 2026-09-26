@@ -1,0 +1,214 @@
+---
+import { brand, business, collections, links, services } from '../config/site';
+
+const year = new Date().getFullYear();
+
+const shopLinks = collections.slice(0, 5);
+const therapyLinks = services.map((service) => ({
+  label: service.title,
+  href: service.href,
+}));
+const legalLinks = [
+  {
+    label: 'Política de envío',
+    href: 'https://amaartesana.com/policies/shipping-policy',
+  },
+  {
+    label: 'Política de reembolso',
+    href: 'https://amaartesana.com/policies/refund-policy',
+  },
+  {
+    label: 'Privacidad',
+    href: 'https://amaartesana.com/policies/privacy-policy',
+  },
+  {
+    label: 'Términos de uso',
+    href: 'https://amaartesana.com/policies/terms-of-service',
+  },
+  {
+    label: 'Aviso legal',
+    href: 'https://amaartesana.com/policies/legal-notice',
+  },
+  {
+    label: 'Mis datos personales',
+    href: 'https://amaartesana.com/pages/my-personal-data',
+  },
+];
+---
+
+<footer class="relative overflow-hidden bg-ink pt-20 pb-10 text-paper">
+  <div
+    class="halo -top-40 left-1/2 h-[520px] w-[720px]"
+    style="--halo-tint: #046b5c; opacity: 0.2"
+    aria-hidden="true"
+  ></div>
+
+  <div class="wrap relative">
+    <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr_0.85fr_0.85fr]">
+      <div>
+        <img
+          src={brand.logo}
+          alt={brand.name}
+          width={brand.logoW}
+          height={brand.logoH}
+          class="h-14 w-auto"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="mt-6 max-w-xs leading-relaxed text-paper/75">
+          Somos una tienda al servicio de tus emociones. Déjate ayudar y guiar por la vida. Bárlate,
+          ámate.
+        </p>
+        <ul class="mt-7 flex items-center gap-3">
+          {[
+            { label: 'Instagram', href: links.instagram, icon: 'instagram' },
+            { label: 'Facebook', href: links.facebook, icon: 'facebook' },
+            { label: 'YouTube', href: links.youtube, icon: 'youtube' },
+          ].map((social) => (
+            <li>
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener"
+                class="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-paper/70 transition-colors duration-400 hover:border-mint hover:text-mint"
+                aria-label={social.label}
+              >
+                {social.icon === 'instagram' && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+                  </svg>
+                )}
+                {social.icon === 'facebook' && (
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                    <path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.24-1.46 1.5-1.46h1.6V4.4c-.28-.04-1.22-.12-2.32-.12-2.3 0-3.88 1.4-3.88 3.98v2.24H7.7v3h2.7V21h3.1Z" />
+                  </svg>
+                )}
+                {social.icon === 'youtube' && (
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                    <path d="M21.6 7.6a2.5 2.5 0 0 0-1.76-1.77C18.28 5.4 12 5.4 12 5.4s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.6C2 9.17 2 12 2 12s0 2.83.4 4.4a2.5 2.5 0 0 0 1.76 1.77c1.56.43 7.84.43 7.84.43s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 14.83 22 12 22 12s0-2.83-.4-4.4ZM10.1 15.1V8.9l5.2 3.1-5.2 3.1Z" />
+                  </svg>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <nav aria-labelledby="footer-tienda">
+        <h2
+          id="footer-tienda"
+          class="font-meta text-[0.7rem] font-black tracking-[0.24em] text-mint uppercase"
+        >
+          Tienda
+        </h2>
+        <ul class="mt-5 space-y-3 text-sm">
+          {shopLinks.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                data-shop-link
+                class="text-paper/70 transition-colors duration-300 hover:text-mint"
+              >
+                {item.title}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href={links.catalogo} data-shop-link class="text-mint underline underline-offset-4">
+              Ver todo el catálogo
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="footer-terapias">
+        <h2
+          id="footer-terapias"
+          class="font-meta text-[0.7rem] font-black tracking-[0.24em] text-mint uppercase"
+        >
+          Terapias
+        </h2>
+        <ul class="mt-5 space-y-3 text-sm">
+          {therapyLinks.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                data-shop-link
+                class="text-paper/70 transition-colors duration-300 hover:text-mint"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href={links.sobreNosotras}
+              data-shop-link
+              class="text-paper/70 transition-colors duration-300 hover:text-mint"
+            >
+              Sobre nosotras
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="font-meta text-[0.7rem] font-black tracking-[0.24em] text-mint uppercase">
+          Visítanos
+        </h2>
+        <address class="mt-5 space-y-3 text-sm not-italic text-paper/70">
+          <p>
+            {business.address.street}
+            <br />
+            {business.address.postalCode} {business.address.locality} ({business.address.region})
+          </p>
+          <p>
+            {business.hours[0].days}
+            <br />
+            {business.hours[0].morning} · {business.hours[0].afternoon}
+          </p>
+          <p>Sábados {business.hours[1].morning}</p>
+          <p>
+            <a href={links.enviarCorreo} class="link-underline">
+              {business.email}
+            </a>
+          </p>
+        </address>
+      </div>
+    </div>
+
+    <div class="mt-16 border-t border-white/10 pt-8">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {legalLinks.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              data-shop-link
+              class="font-meta text-[0.68rem] font-black tracking-[0.14em] text-paper/70 uppercase transition-colors duration-300 hover:text-mint"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <p class="font-meta text-[0.7rem] font-black tracking-[0.14em] text-paper/70 uppercase">
+          © {year} {business.name} · Herbolario en Petrer (Alicante)
+        </p>
+        <p class="font-meta text-[0.7rem] font-black tracking-[0.14em] text-paper/70 uppercase">
+          {business.paymentMethods.join(' · ')}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

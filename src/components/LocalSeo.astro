@@ -1,0 +1,130 @@
+---
+import { business, collections, herbolarioMedia, links, sizes, src, srcset } from '../config/site';
+
+const paragraphs = [
+  'Si buscas un herbolario en Petrer o una herbolistería cerca de ti, ya has llegado. En Ama arte-sana cuidados de ti y de tus emociones con productos naturales seleccionados uno a uno: plantas medicinales, infusiones naturales, suplementos, vitaminas, cosmética natural, productos ecológicos y productos de dietética.',
+  'Somos una tienda de productos naturales en el corazón de Petrer (Alicante), en la Avenida de Elda 68. También somos el herbolario más cómodo para quien viene de Elda: los dos pueblos están pegados y en cinco minutos estás en la puerta. Atendemos igual a clientes de Villena, Caudete y Biar, y enviamos a toda España.',
+  'Y junto a la herbolistería encontrarás incienso y sahumerios, minerales y piedras, cartas de tarot y oráculos, amuletos, velas, colonias espirituales y decoración del hogar. Si lo que buscas es acompañamiento, hacemos constelaciones familiares, reiki, flores de Bach, cursos y talleres.',
+];
+---
+
+<section id="herbolario" class="section-pad relative overflow-hidden bg-paper">
+  <div
+    class="halo top-10 -right-40 h-[520px] w-[520px]"
+    style="--halo-tint: #bdf2eb; opacity: 0.3"
+    aria-hidden="true"
+  ></div>
+
+  <div class="wrap relative grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+    <div>
+      <p class="kicker" data-reveal>
+        Herbolario y herbolistería
+      </p>
+      <h2 id="local-title" class="display-lg mt-5" data-reveal>
+        Tu herbolario en Petrer, a un paso de Elda
+      </h2>
+      <span class="rule" data-reveal-rule aria-hidden="true"></span>
+
+      <div class="prose-ama mt-9 max-w-2xl text-[1.05rem] leading-[1.85] text-ink-70">
+        {paragraphs.map((paragraph) => (
+          <p data-reveal>{paragraph}</p>
+        ))}
+      </div>
+
+      <ul class="mt-10 flex flex-wrap gap-2.5">
+        {collections.map((collection) => (
+          <li data-reveal>
+            <a href={collection.href} data-shop-link class="chip">
+              {collection.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="mt-8 max-w-2xl text-xs leading-relaxed text-ink-50">
+        La información de esta web es orientativa y no sustituye la consulta con un profesional
+        sanitario. Si tomas medicación o estás en tratamiento, consúltalo antes de incorporar
+        productos o complementos.
+      </p>
+    </div>
+
+    <aside class="lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:self-start" data-reveal>
+      <div class="overflow-hidden rounded-[var(--radius-card)] border border-line bg-card">
+        <div class="relative aspect-[16/10] overflow-hidden">
+          <img
+            src={src(herbolarioMedia)}
+            srcset={srcset(herbolarioMedia)}
+            sizes={sizes.aside}
+            width={herbolarioMedia.w}
+            height={herbolarioMedia.h}
+            alt="Herbolario en Petrer: estantería de productos naturales de Ama arte-sana"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+          <p class="absolute bottom-5 left-6 font-display text-2xl text-paper">
+            Av. de Elda 68 · Petrer
+          </p>
+        </div>
+
+        <div class="p-7">
+          <h3 class="text-2xl">Visítanos en Petrer</h3>
+          <dl class="mt-5 space-y-3 text-sm text-ink-70">
+            <div class="flex justify-between gap-4 border-b border-line pb-3">
+              <dt class="font-meta text-[0.7rem] font-black tracking-[0.18em] uppercase">
+                Lunes a viernes
+              </dt>
+              <dd class="text-right">
+                {business.hours[0].morning}
+                <br />
+                {business.hours[0].afternoon}
+              </dd>
+            </div>
+            <div class="flex justify-between gap-4 border-b border-line pb-3">
+              <dt class="font-meta text-[0.7rem] font-black tracking-[0.18em] uppercase">Sábado</dt>
+              <dd class="text-right">{business.hours[1].morning}</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt class="font-meta text-[0.7rem] font-black tracking-[0.18em] uppercase">
+                Domingo
+              </dt>
+              <dd>Cerrado</dd>
+            </div>
+          </dl>
+
+          <div class="mt-7 flex flex-col gap-3">
+            <a href={links.catalogo} data-shop-link class="btn btn-primary w-full">
+              <span data-shop-label>Entrar en la tienda</span>
+              <span class="btn-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+            <a href={links.mapas} target="_blank" rel="noopener" class="btn btn-ghost w-full">
+              Cómo llegar
+              <span class="btn-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </div>
+
+          <p class="mt-6 text-sm text-ink-50">
+            ¿Prefieres que te atendamos en la tienda? Escríbenos a
+            <a href={links.enviarCorreo} class="link-underline text-teal">
+              {business.email}
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+
+      <ul class="mt-6 flex flex-wrap gap-2">
+        {business.areaServed.map((area) => (
+          <li class="rounded-full border border-line bg-card px-3 py-1.5 font-meta text-[0.68rem] font-black tracking-[0.12em] uppercase text-ink-50">
+            {area}
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </div>
+</section>

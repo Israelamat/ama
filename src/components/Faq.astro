@@ -1,0 +1,27 @@
+---
+import SectionHead from './SectionHead.astro';
+import { faqs } from '../config/site';
+---
+
+<section id="faq" class="section-pad bg-paper">
+  <div class="wrap">
+    <SectionHead
+      kicker="Preguntas frecuentes"
+      title="Todo lo que suelen preguntarnos"
+      id="faq-title"
+      lede="Y si te queda alguna duda, escríbenos: tu pregunta es importante porque es la tuya."
+    />
+
+    <div class="mx-auto mt-16 grid max-w-5xl gap-x-14 lg:grid-cols-2">
+      {faqs.map((faq, index) => (
+        <details class="faq-item" data-reveal open={index === 0}>
+          <summary>
+            <span>{faq.q}</span>
+            <span class="faq-icon" aria-hidden="true" />
+          </summary>
+          <div class="faq-body">{faq.a}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

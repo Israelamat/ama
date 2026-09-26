@@ -1,0 +1,56 @@
+---
+const words = [
+  'Herbolario',
+  'Plantas medicinales',
+  'Infusiones naturales',
+  'Dietética',
+  'Suplementos',
+  'Vitaminas',
+  'Cosmética natural',
+  'Productos ecológicos',
+  'Aceites esenciales',
+  'Incienso',
+  'Minerales',
+  'Tarot',
+  'Amuletos',
+  'Constelaciones',
+  'Reiki',
+  'Flores de Bach',
+];
+---
+
+<div class="relative overflow-hidden border-y border-ink/10 bg-ink py-5 text-paper">
+  <div class="marquee">
+    {[0, 1].map((group) => (
+      <ul
+        class="flex shrink-0 items-center gap-12 pr-12"
+        aria-hidden={group === 1 ? 'true' : undefined}
+      >
+        {words.map((word) => (
+          <li class="flex items-center gap-12 whitespace-nowrap font-display text-2xl sm:text-3xl">
+            {word}
+            <span class="h-1.5 w-1.5 rounded-full bg-mint" />
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>
+
+<div class="overflow-hidden border-b border-ink/10 bg-mint py-4 text-ink">
+  <div class="marquee marquee-slow">
+    {[0, 1].map((group) => (
+      <ul
+        class="flex shrink-0 items-center gap-10 pr-10"
+        aria-hidden={group === 1 ? 'true' : undefined}
+      >
+        {words.map((word) => (
+          <li class="flex items-center gap-10 whitespace-nowrap font-meta text-[0.72rem] font-black tracking-[0.24em] uppercase">
+            {word}
+            <span class="h-1 w-1 rounded-full bg-ink/50" />
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>

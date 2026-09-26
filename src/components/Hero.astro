@@ -1,0 +1,127 @@
+---
+import { brand, business, heroMedia, heroSteps, links, src, srcset } from '../config/site';
+
+// La imagen del hero es el elemento LCP. Antes se animaba de opacity 0 a 1 en
+// 1,9 s con GSAP, y un elemento con opacidad en movimiento no cuenta como LCP
+// hasta que la animación acaba: eso costaba unos 2 s de LCP. Ahora el contenedor
+// sólo anima `scale`, que no bloquea el LCP, y no necesita ser `.will-reveal`.
+
+const meta = [
+  `Pedido mínimo ${business.priceMin} €`,
+  `Portes gratis desde ${business.freeShippingFrom} €`,
+  'Asesoramiento presencial en Petrer',
+];
+
+const heroSrcset = srcset(heroMedia, heroSteps);
+---
+
+<section
+  id="top"
+  data-hero
+  class="relative isolate flex min-h-[100svh] items-center overflow-hidden"
+>
+  <div class="absolute inset-0 -z-10" data-hero-media>
+    <img
+      src={src(heroMedia)}
+      srcset={heroSrcset}
+      sizes="100vw"
+      width={heroMedia.w}
+      height={heroMedia.h}
+      alt="Cielo con nubes vistos desde arriba"
+      class="h-full w-full object-cover object-center"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
+  <div
+    class="absolute inset-0 -z-10 bg-[radial-gradient(120%_85%_at_50%_28%,rgba(246,246,246,0.86)_0%,rgba(246,246,246,0.55)_42%,rgba(246,246,246,0.15)_70%,rgba(246,246,246,0.6)_100%)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="halo -left-24 top-[12%] -z-10 h-[420px] w-[420px]"
+    style="--halo-tint: #5dd2b4; opacity: 0.3"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="halo -right-32 bottom-[6%] -z-10 h-[380px] w-[380px]"
+    style="--halo-tint: #bdf2eb; opacity: 0.4"
+    aria-hidden="true"
+  ></div>
+  <div class="grain -z-10" aria-hidden="true"></div>
+
+  <div class="wrap pt-[calc(var(--header-h)+3rem)] pb-32 text-center">
+    <p class="kicker" style="--intro-delay: 0s" data-hero-kicker>
+      Herbolario · Dietética · Terapias · Petrer (Alicante)
+    </p>
+
+    <h1
+      id="hero-title"
+      class="display-xl mx-auto mt-7 max-w-5xl"
+      style="--intro-delay: 0.06s"
+      data-hero-title
+    >
+      <span class="line-mask">
+        <span style="--intro-delay: 0.1s" data-hero-line>
+          Tu herbolario en Petrer
+        </span>
+      </span>
+      <span class="mt-4 block font-sans text-[clamp(1.05rem,2.6vw,1.9rem)] font-medium leading-[1.35] tracking-[-0.01em] text-ink-70">
+        <span class="line-mask">
+          <span style="--intro-delay: 0.18s" data-hero-line>
+            {brand.hero}
+          </span>
+        </span>
+      </span>
+    </h1>
+
+    <p class="lede mx-auto mt-8 max-w-2xl" style="--intro-delay: 0.28s" data-hero-text>
+      Productos naturales, plantas medicinales, infusiones, suplementos, vitaminas y cosmética
+      natural junto a una selección de tarot, incienso, minerales y amuletos. Una tienda de
+      productos naturales en <strong class="font-semibold text-ink">Petrer</strong>, a un paso de
+      Elda, con envío a toda España.
+    </p>
+
+    <div
+      class="mt-11 flex flex-wrap items-center justify-center gap-4"
+      style="--intro-delay: 0.36s"
+      data-hero-actions
+    >
+      <a href={links.catalogo} data-shop-link class="btn btn-primary btn-lg">
+        <span data-shop-label>Entrar en la tienda</span>
+        <span class="btn-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+      <a href="#manifiesto" class="btn btn-ghost btn-lg">
+        Conócenos
+      </a>
+    </div>
+
+    <ul
+      class="mx-auto mt-14 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3"
+      style="--intro-delay: 0.44s"
+      data-hero-meta
+    >
+      {meta.map((item) => (
+        <li class="flex items-center gap-3 font-meta text-[0.72rem] font-black tracking-[0.16em] uppercase text-ink-70">
+          <span class="h-1.5 w-1.5 rounded-full bg-mint" aria-hidden="true" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-3"
+    style="--intro-delay: 0.6s"
+    data-hero-cue
+    aria-hidden="true"
+  >
+    <span class="font-meta text-[0.62rem] font-black tracking-[0.32em] uppercase text-ink-50">
+      Desliza
+    </span>
+    <span class="relative block h-12 w-px overflow-hidden bg-line">
+      <span class="absolute inset-x-0 top-0 h-4 bg-teal anim-blink"></span>
+    </span>
+  </div>
+</section>

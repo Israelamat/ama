@@ -1,0 +1,50 @@
+---
+import { brand } from '../config/site';
+---
+
+<div
+  data-handoff
+  aria-hidden="true"
+  class="pointer-events-none fixed inset-0 z-[95] grid place-items-center bg-ink opacity-0"
+>
+  <div class="flex flex-col items-center gap-7 px-8 text-center">
+    <img
+      src={brand.logo}
+      alt=""
+      width={brand.logoW}
+      height={brand.logoH}
+      class="h-14 w-auto"
+      decoding="async"
+      loading="lazy"
+    />
+    <p class="font-display text-2xl text-paper sm:text-3xl">Entrando en la tienda…</p>
+    <div class="h-px w-[180px] overflow-hidden bg-white/15">
+      <span class="block h-full w-full origin-left scale-x-0 bg-mint" data-handoff-bar></span>
+    </div>
+    <p class="font-meta text-[0.68rem] font-black tracking-[0.24em] text-mint uppercase">
+      Ama arte-sana · Petrer
+    </p>
+  </div>
+</div>
+
+<style>
+  [data-handoff] {
+    transition:
+      opacity 0.45s var(--ease-soft),
+      visibility 0.45s;
+    visibility: hidden;
+  }
+
+  [data-handoff].is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  [data-handoff-bar] {
+    transition: transform 0.7s var(--ease-soft);
+  }
+
+  [data-handoff].is-active [data-handoff-bar] {
+    transform: scaleX(1);
+  }
+</style>

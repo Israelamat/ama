@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import { business, links } from '../config/site';
+
+const title = 'Página no encontrada | Ama arte-sana';
+const description =
+  'Esta página no existe. Pero el herbolario sigue aquí: productos naturales, plantas medicinales, incienso, minerales y tarot en Petrer.';
+---
+
+<Base title={title} description={description}>
+  <Header />
+
+  <main id="contenido" class="relative flex min-h-[100svh] items-center overflow-hidden">
+    <div
+      class="halo -left-32 top-[18%] h-[420px] w-[420px]"
+      style="--halo-tint: #bdf2eb; opacity: 0.35"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="halo -right-24 bottom-[8%] h-[360px] w-[360px]"
+      style="--halo-tint: #5dd2b4; opacity: 0.3"
+      aria-hidden="true"
+    ></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="wrap relative py-32 text-center">
+      <p class="kicker">Error 404</p>
+      <h1 class="display-lg mx-auto mt-6 max-w-3xl">Esta página se ha ido de aromaterapia</h1>
+      <p class="lede mx-auto mt-6 max-w-xl">
+        No hemos encontrado lo que buscabas. Pero la tienda sigue abierta: {business.address.street}
+        , en Petrer, y online con envío a toda España.
+      </p>
+
+      <div class="mt-11 flex flex-wrap items-center justify-center gap-4">
+        <a href="/" class="btn btn-primary btn-lg">
+          Volver al inicio
+          <span class="btn-arrow" aria-hidden="true">
+            →
+          </span>
+        </a>
+        <a href={links.catalogo} data-shop-link class="btn btn-ghost btn-lg">
+          Ir a la tienda
+          <span class="btn-arrow" aria-hidden="true">
+            →
+          </span>
+        </a>
+      </div>
+
+      <ul class="mx-auto mt-14 flex max-w-3xl flex-wrap items-center justify-center gap-2.5">
+        {[
+          { label: 'Manifiesto', href: '/#manifiesto' },
+          { label: 'Catálogo', href: '/#catalogo' },
+          { label: 'Terapias', href: '/#terapias' },
+          { label: 'Visítanos', href: '/#visitanos' },
+        ].map((item) => (
+          <li>
+            <a href={item.href} class="chip">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+</Base>

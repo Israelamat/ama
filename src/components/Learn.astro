@@ -1,0 +1,106 @@
+---
+import { brand, business, links } from '../config/site';
+---
+
+<section id="aprende" class="section-pad relative bg-paper-2">
+  <div class="wrap grid gap-6 lg:grid-cols-2">
+    <article
+      class="group relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-card)] bg-ink p-8 text-paper sm:p-10"
+      data-reveal
+    >
+      <div
+        class="halo -top-24 -right-16 h-64 w-64"
+        style="--halo-tint: #046b5c; opacity: 0.3"
+        aria-hidden="true"
+      ></div>
+      <div class="grain opacity-20 mix-blend-screen" aria-hidden="true"></div>
+
+      <div class="relative">
+        <p class="kicker kicker-ink">Aprende y vive</p>
+        <h3 class="display-md mt-4 max-w-md">Te enseñamos a transformar y aceptar tus emociones</h3>
+        <p class="mt-5 max-w-md leading-relaxed text-paper/75">
+          En nuestro canal de YouTube te enseñamos, de nuestra mano, cómo salir de las emociones
+          dañinas y aceptar el camino hacia la felicidad. Sé valiente, actúa, y entra.
+        </p>
+      </div>
+
+      <div class="relative mt-10 flex flex-wrap items-center gap-5">
+        <a href={links.youtube} target="_blank" rel="noopener" class="btn btn-mint">
+          <span
+            class="grid h-6 w-6 place-items-center rounded-full bg-ink text-mint"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24" class="h-3 w-3 translate-x-[1px]" fill="currentColor">
+              <path d="M8 5.5v13l11-6.5-11-6.5Z"></path>
+            </svg>
+          </span>
+          Abrir el canal
+        </a>
+        <p class="font-meta text-[0.7rem] font-black tracking-[0.2em] text-paper/60 uppercase">
+          YouTube · Ama arte-sana
+        </p>
+      </div>
+    </article>
+
+    <article
+      class="card flex flex-col justify-between p-8 sm:p-10"
+      data-reveal
+      style="--reveal-delay: 100ms"
+    >
+      <div>
+        <p class="kicker">Boletín</p>
+        <h3 class="display-md mt-4">Promociones, nuevos productos y ofertas</h3>
+        <p class="mt-5 leading-relaxed text-ink-70">
+          Directamente a tu bandeja de entrada. Te escribimos de vez en cuando, con lo nuevo de la
+          tienda y las novedades de nuestras terapias y talleres.
+        </p>
+      </div>
+
+      <form
+        action={links.newsletter}
+        method="post"
+        accept-charset="UTF-8"
+        class="mt-9"
+        data-newsletter
+      >
+        <input type="hidden" name="form_type" value="customer" />
+        <input type="hidden" name="utf8" value="✓" />
+        <label for="email" class="sr-only">
+          Tu correo electrónico
+        </label>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <input
+            id="email"
+            class="field"
+            type="email"
+            name="contact[email]"
+            required
+            autocomplete="email"
+            placeholder="tu@email.com"
+          />
+          <button type="submit" class="btn btn-primary shrink-0" data-newsletter-submit>
+            Suscribirme
+            <span class="btn-arrow" aria-hidden="true">
+              →
+            </span>
+          </button>
+        </div>
+        <!--
+          El aviso legal y el estado son nodos separados a propósito: antes el JS
+          escribía el mensaje de éxito sobre este párrafo y la política de
+          privacidad desaparecía en cuanto mandabas el formulario.
+        -->
+        <p
+          class="mt-4 text-xs leading-relaxed text-ink-70"
+          role="status"
+          aria-live="polite"
+          data-newsletter-status
+        ></p>
+        <p class="mt-2 text-xs leading-relaxed text-ink-50">
+          Al suscribirte aceptas recibir comunicaciones de {brand.name}. Puedes darte de baja en
+          cualquier momento desde el propio correo o escribiéndonos a {business.email}.
+        </p>
+      </form>
+    </article>
+  </div>
+</section>

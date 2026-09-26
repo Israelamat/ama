@@ -1,0 +1,144 @@
+---
+import SectionHead from './SectionHead.astro';
+import { links, services, sizes, src, srcset } from '../config/site';
+---
+
+<section id="terapias" class="section-pad relative overflow-hidden bg-ink text-paper">
+  <div
+    class="halo -top-32 left-1/3 h-[420px] w-[420px]"
+    style="--halo-tint: #046b5c; opacity: 0.25"
+    aria-hidden="true"
+  ></div>
+  <div class="grain opacity-25 mix-blend-screen" aria-hidden="true"></div>
+
+  <div class="wrap relative">
+    <SectionHead
+      kicker="Terapias, talleres y charlas"
+      title="Acompañarte también es un ritual"
+      id="terapias-title"
+      theme="ink"
+      lede="Aprende mientras cultivas tu espíritu: herramientas para el crecimiento personal y de tus emociones, tanto para uso personal como si te dedicas a las terapias. Por el momento las ofrecemos de forma presencial en la tienda; pronto ofertaremos opciones online."
+    />
+
+    <ul class="mt-16 grid gap-6 lg:grid-cols-3">
+      {services.map((service, index) => (
+        <li class="service-card" data-reveal style={`--reveal-delay: ${index * 80}ms`}>
+          <a href={service.href} data-shop-link class="group block h-full">
+            {service.image ? (
+              <div class="service-media">
+                <img
+                  src={src(service.image)}
+                  srcset={srcset(service.image)}
+                  sizes={sizes.service}
+                  width={service.image.w}
+                  height={service.image.h}
+                  alt={service.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="service-index">0{index + 1}</span>
+              </div>
+            ) : (
+              <div class="service-media service-media--plain">
+                <span class="anim-pulse-ring absolute inset-0 m-auto h-40 w-40 rounded-full border border-mint/40" />
+                <span class="relative font-display text-5xl text-mint/90">✧</span>
+              </div>
+            )}
+
+            <div class="flex h-full flex-col gap-4 p-7">
+              <p class="font-meta text-[0.68rem] font-black tracking-[0.22em] text-mint uppercase">
+                {service.meta}
+              </p>
+              <h3 class="text-2xl text-paper sm:text-[1.7rem]">{service.title}</h3>
+              <p class="text-sm leading-relaxed text-paper/70">{service.text}</p>
+              <span class="mt-auto inline-flex items-center gap-2 pt-3 font-sans text-sm font-bold text-mint">
+                {service.cta}
+                <span class="btn-arrow" aria-hidden="true">
+                  →
+                </span>
+              </span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-14 flex flex-wrap items-center justify-center gap-4" data-reveal>
+      <a href={links.contacto} data-shop-link class="btn btn-mint btn-lg">
+        Pedir información
+        <span class="btn-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+      <a
+        href={links.cursos}
+        data-shop-link
+        class="btn btn-ghost btn-lg !text-paper hover:!text-ink"
+      >
+        Cursos, talleres y charlas
+        <span class="btn-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-card {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: var(--radius-card);
+    background: rgb(255 255 255 / 0.03);
+    /* `translate` y no `transform`: los reveals escriben `transform` en línea y
+       antes lo pisaban, así que el lift de las cards no se veía. */
+    transition:
+      translate 0.6s var(--ease-soft),
+      border-color 0.6s var(--ease-soft),
+      background-color 0.6s var(--ease-soft);
+  }
+
+  .service-card:hover {
+    translate: 0 -6px;
+    border-color: rgb(93 210 180 / 0.65);
+    background: rgb(93 210 180 / 0.06);
+  }
+
+  .service-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .service-media--plain {
+    display: grid;
+    place-items: center;
+  }
+
+  .service-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scale: 1;
+    filter: saturate(0.85) contrast(1.02);
+    transition: scale 0.9s var(--ease-soft);
+  }
+
+  .service-card:hover .service-media img {
+    scale: 1.06;
+  }
+
+  .service-index {
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+    font-family: var(--font-meta);
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.24em;
+    color: rgb(255 255 255 / 0.75);
+  }
+</style>

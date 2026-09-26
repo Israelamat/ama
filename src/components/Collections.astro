@@ -1,0 +1,66 @@
+---
+import SectionHead from './SectionHead.astro';
+import { collections, links, sizes, src, srcset } from '../config/site';
+---
+
+<section id="catalogo" class="section-pad relative bg-paper-2">
+  <div class="wrap">
+    <SectionHead
+      kicker="El catálogo"
+      title="Sección por sección, como nos gusta a nosotras"
+      id="catalogo-title"
+      lede="De la herbolistería a los minerales: cada colección de la tienda, con su propio rincón. Pincha en la que te llame y te llevamos directamente."
+    />
+
+    <ul class="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      {collections.map((collection, index) => (
+        <li class="contents">
+          <a
+            href={collection.href}
+            data-shop-link
+            data-reveal
+            style={`--reveal-delay: ${Math.min(index, 5) * 60}ms`}
+            class:list={['card group', collection.featured && 'sm:col-span-2 xl:row-span-2']}
+          >
+            <div class:list={['card-media', collection.featured && 'xl:aspect-[4/5]']}>
+              <img
+                src={src(collection.image)}
+                srcset={srcset(collection.image)}
+                sizes={collection.featured ? sizes.cardFeatured : sizes.card}
+                width={collection.image.w}
+                height={collection.image.h}
+                alt={collection.alt}
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="absolute top-4 left-4 z-10 font-meta text-[0.65rem] font-black tracking-[0.2em] text-white/85">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span class="absolute right-4 bottom-4 z-10 grid h-11 w-11 translate-y-2 place-items-center rounded-full bg-mint text-ink opacity-0 transition-[translate,opacity] duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <span aria-hidden="true">→</span>
+              </span>
+            </div>
+            <div class="flex flex-1 flex-col gap-2 p-6">
+              <h3 class:list={['text-2xl', collection.featured && 'sm:text-3xl']}>
+                {collection.title}
+              </h3>
+              <p class="text-sm text-ink-70">{collection.tagline}</p>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-14 flex flex-wrap items-center justify-center gap-4" data-reveal>
+      <a href={links.catalogo} data-shop-link class="btn btn-primary btn-lg">
+        <span data-shop-label>Ver el catálogo completo</span>
+        <span class="btn-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+      <p class="font-meta text-[0.72rem] font-black tracking-[0.18em] uppercase text-ink-50">
+        Pedido mínimo 10 € · Portes gratis desde 80 €
+      </p>
+    </div>
+  </div>
+</section>

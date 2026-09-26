@@ -1,0 +1,51 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  id?: string;
+  lede?: string;
+  align?: 'left' | 'center';
+  theme?: 'light' | 'ink';
+  class?: string;
+}
+
+const {
+  kicker,
+  title,
+  id,
+  lede,
+  align = 'center',
+  theme = 'light',
+  class: className = '',
+} = Astro.props;
+const isCenter = align === 'center';
+---
+
+<header
+  class:list={[
+    'max-w-3xl',
+    isCenter && 'mx-auto text-center',
+    theme === 'ink' && 'text-paper',
+    className,
+  ]}
+>
+  <p class:list={['kicker', theme === 'ink' && 'kicker-ink']} data-reveal>
+    {kicker}
+  </p>
+  <h2 id={id} class="display-lg mt-5" data-reveal>
+    {title}
+  </h2>
+  {lede && (
+    <p
+      class:list={[
+        'lede mt-6',
+        isCenter && 'mx-auto max-w-2xl',
+        theme === 'ink' && 'text-paper/70',
+      ]}
+      data-reveal
+    >
+      {lede}
+    </p>
+  )}
+  <span class:list={['rule', isCenter && 'rule-center']} data-reveal-rule aria-hidden="true"></span>
+</header>

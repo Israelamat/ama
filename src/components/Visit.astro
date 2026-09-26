@@ -1,0 +1,109 @@
+---
+import { business, links } from '../config/site';
+
+const osmEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${business.mapBounds}&layer=mapnik&marker=${business.geo.lat},${business.geo.lng}`;
+---
+
+<section id="visitanos" class="section-pad relative overflow-hidden bg-paper-2">
+  <div
+    class="halo -top-24 -left-32 h-[420px] w-[420px]"
+    style="--halo-tint: #bdf2eb; opacity: 0.35"
+    aria-hidden="true"
+  ></div>
+
+  <div class="wrap relative grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+    <div>
+      <p class="kicker" data-reveal>
+        Dónde encontrarnos
+      </p>
+      <h2 id="visitanos-title" class="display-lg mt-5" data-reveal>
+        Una tienda de barrio en Petrer
+      </h2>
+      <span class="rule" data-reveal-rule aria-hidden="true"></span>
+
+      <p class="lede mt-8" data-reveal>
+        Estamos en la <strong class="font-semibold text-ink">{business.address.street}</strong>, en
+        {business.address.postalCode} {business.address.locality}({business.address.region}). Ven
+        con calma, pregunta lo que quieras y déjanos acompañarte.
+      </p>
+
+      <p class="mt-5 max-w-xl leading-relaxed text-ink-70" data-reveal>
+        Si vienes de Elda, es un paseo de pocos minutos: Petrer y Elda son municipios contiguos y
+        nuestra tienda está en la propia avenida Elda. También atendemos a quien nos viene de
+        Villena, Caudete o Biar, y enviamos a toda España.
+      </p>
+
+      <dl class="mt-10 divide-y divide-line border-y border-line">
+        {business.hours.map((row) => (
+          <div class="flex items-baseline justify-between gap-6 py-4" data-reveal>
+            <dt class="font-meta text-[0.72rem] font-black tracking-[0.18em] uppercase">
+              {row.days}
+            </dt>
+            <dd class="text-right text-sm text-ink-70">
+              {row.morning}
+              {row.afternoon && <span class="block">{row.afternoon}</span>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="mt-9 flex flex-wrap gap-3" data-reveal>
+        <a href={links.mapas} target="_blank" rel="noopener" class="btn btn-primary">
+          Abrir en Google Maps
+          <span class="btn-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+        <a href={links.enviarCorreo} class="btn btn-ghost">
+          {business.email}
+        </a>
+      </div>
+    </div>
+
+    <div data-reveal class="relative">
+      <div
+        data-map-facade
+        class="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-card)] border border-line bg-card"
+      >
+        <div class="absolute inset-0 grid place-items-center" aria-hidden="true">
+          <div class="map-grid absolute inset-0"></div>
+          <div class="relative grid place-items-center">
+            <span class="anim-pulse-ring absolute h-28 w-28 rounded-full border border-mint"></span>
+            <span class="absolute h-28 w-28 rounded-full border border-mint/40"></span>
+            <span class="grid h-14 w-14 place-items-center rounded-full bg-ink text-mint shadow-lg">
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a7 7 0 0 0-7 7c0 5.1 6.1 12.3 6.4 12.6a.9.9 0 0 0 1.2 0C12.9 21.3 19 14.1 19 9a7 7 0 0 0-7-7Zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2Z"></path>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 bg-gradient-to-t from-card via-card/90 to-transparent p-6">
+          <p class="font-meta text-[0.7rem] font-black tracking-[0.2em] uppercase text-ink-50">
+            Mapa interactivo
+          </p>
+          <button type="button" class="btn btn-ghost" data-map-load data-src={osmEmbed}>
+            Cargar el mapa
+          </button>
+        </div>
+      </div>
+
+      <p class="mt-4 text-sm text-ink-50">
+        También puedes pasar por{' '}
+        <a href={links.busqueda} data-shop-link class="link-underline text-teal">
+          la tienda online
+        </a>{' '}
+        y recoger o dejar tu pedido cuando vengas a Petrer.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .map-grid {
+    background-image:
+      linear-gradient(to right, rgb(231 226 226 / 0.9) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(231 226 226 / 0.9) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(70% 70% at 50% 45%, #000 30%, transparent 100%);
+  }
+</style>

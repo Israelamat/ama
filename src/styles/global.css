@@ -1,0 +1,770 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Kalam';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://amaartesana.com/cdn/fonts/kalam/kalam_n7.9d145e82c2f25f7b78520244aca4418b2ee7dc72.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://amaartesana.com/cdn/fonts/poppins/poppins_n5.ad5b4b72b59a00358afc706450c864c3c8323842.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://amaartesana.com/cdn/fonts/poppins/poppins_n7.56758dcf284489feb014a026f3727f2f20a54626.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('https://amaartesana.com/cdn/fonts/roboto/roboto_n9.0c184e6fa23f90226ecbf2340f41a7f829851913.woff2')
+    format('woff2');
+}
+
+@theme {
+  --color-ink: #190d0d;
+  --color-ink-70: #4a3a3a;
+  --color-ink-50: #6d5d5d;
+  --color-paper: #f6f6f6;
+  --color-paper-2: #f2f2f2;
+  --color-card: #ffffff;
+  --color-line: #e7e2e2;
+  --color-mint: #5dd2b4;
+  --color-mint-soft: #bdf2eb;
+  /* Oscurecido desde #058677 (4,15:1, fallaba AA) a 5,9:1 sobre papel. */
+  --color-teal: #046b5c;
+  /* #e70a0a daba 4,37:1 sobre papel, justo por debajo de AA. */
+  --color-rose: #c80909;
+
+  --font-display: 'Kalam', 'Segoe Print', cursive;
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-meta: 'Roboto', system-ui, sans-serif;
+
+  --radius-card: 20px;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    --header-h: 76px;
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* El scroll suave lo hace el navegador: sin Lenis ni offsets calculados a mano,
+       así que Ctrl/Cmd+click, "abrir en pestaña nueva" y el botón atrás siguen vivos. */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* `clip` no crea contenedor de scroll, así que no rompe `position: sticky`. */
+    overflow-x: clip;
+  }
+
+  body.is-transitioning {
+    overflow: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-mint);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  /* Compensa el header fijo al saltar a un ancla, sin offsets en JS. */
+  :target,
+  section[id] {
+    scroll-margin-top: calc(var(--header-h) + 8px);
+  }
+
+  main:focus {
+    outline: none;
+  }
+
+  .kicker {
+    font-family: var(--font-meta);
+    font-weight: 900;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+  }
+
+  .kicker-ink {
+    color: var(--color-mint);
+  }
+
+  .display-xl {
+    font-size: clamp(2.75rem, 8.2vw, 6.5rem);
+    line-height: 0.98;
+  }
+
+  .display-lg {
+    font-size: clamp(2.15rem, 5.4vw, 4rem);
+    line-height: 1.04;
+  }
+
+  .display-md {
+    font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+    line-height: 1.12;
+  }
+
+  .lede {
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.75;
+    color: var(--color-ink-70);
+  }
+
+  .rule {
+    display: block;
+    width: 50px;
+    height: 2px;
+    margin-top: 1.25rem;
+    background: var(--color-mint);
+    transform-origin: left center;
+  }
+
+  .rule-center {
+    margin-inline: auto;
+  }
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+      color 0.4s var(--ease-soft),
+      border-color 0.4s var(--ease-soft),
+      transform 0.4s var(--ease-soft),
+      box-shadow 0.4s var(--ease-soft);
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-mint);
+    transform: translate3d(0, 101%, 0);
+    transition: transform 0.55s var(--ease-soft);
+  }
+
+  .btn:hover::after,
+  .btn:focus-visible::after {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .btn-primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    box-shadow: 0 18px 40px -22px rgba(25, 13, 13, 0.9);
+  }
+
+  .btn-primary:hover {
+    color: var(--color-ink);
+    box-shadow: 0 22px 46px -20px rgba(5, 134, 119, 0.7);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-mint);
+  }
+
+  .btn-mint {
+    background: var(--color-mint);
+    color: var(--color-ink);
+  }
+
+  .btn-mint::after {
+    background: var(--color-card);
+  }
+
+  .btn-lg {
+    padding: 1.15rem 2rem;
+    font-size: 1rem;
+  }
+
+  .btn-arrow {
+    transition: transform 0.45s var(--ease-soft);
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    /* El hover se anima con `translate`, no `transform`: los reveals escriben
+       `transform` inline y lo pisarían (por eso el lift se quedaba muerto). */
+    transition:
+      translate 0.6s var(--ease-soft),
+      box-shadow 0.6s var(--ease-soft),
+      border-color 0.6s var(--ease-soft);
+  }
+
+  .card:hover {
+    translate: 0 -6px;
+    border-color: color-mix(in srgb, var(--color-mint) 60%, var(--color-line));
+    box-shadow: 0 30px 60px -38px rgba(25, 13, 13, 0.55);
+  }
+
+  .card-media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--color-paper-2);
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale 0.9s var(--ease-soft);
+  }
+
+  .card:hover .card-media img {
+    scale: 1.07;
+  }
+
+  .card-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(25, 13, 13, 0) 45%, rgba(25, 13, 13, 0.55) 100%);
+    opacity: 0;
+    transition: opacity 0.6s var(--ease-soft);
+  }
+
+  .card:hover .card-media::after {
+    opacity: 1;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    background: var(--color-card);
+    font-family: var(--font-meta);
+    font-weight: 900;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-ink-70);
+    transition:
+      color 0.4s var(--ease-soft),
+      border-color 0.4s var(--ease-soft),
+      background-color 0.4s var(--ease-soft);
+  }
+
+  .chip:hover {
+    color: var(--color-ink);
+    border-color: var(--color-mint);
+    background: var(--color-mint-soft);
+  }
+
+  .field {
+    width: 100%;
+    padding: 0.95rem 1.15rem;
+    border-radius: 14px;
+    border: 1px solid var(--color-line);
+    background: var(--color-card);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    transition:
+      border-color 0.3s var(--ease-soft),
+      box-shadow 0.3s var(--ease-soft);
+  }
+
+  .field::placeholder {
+    color: var(--color-ink-50);
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--color-mint);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-mint) 25%, transparent);
+  }
+
+  .line-mask {
+    display: block;
+    overflow: hidden;
+  }
+
+  .line-mask > span {
+    display: block;
+  }
+
+  .prose-ama p + p {
+    margin-top: 1.15rem;
+  }
+
+  .prose-ama a {
+    color: var(--color-teal);
+    text-underline-offset: 4px;
+    text-decoration: underline;
+  }
+
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: ama-marquee 38s linear infinite;
+  }
+
+  .marquee-slow {
+    animation-duration: 58s;
+  }
+
+  .marquee:hover {
+    animation-play-state: paused;
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+
+  /* Antes: `filter: blur(70px)` sobre círculos de 380–720 px. Eso rasteriza un
+     desenfoque enorme por cada halo (8 en la página) y bloquea el hilo de
+     composición al hacer scroll. Un radial-gradient pre-desenfocado es visualmente
+     equivalente y se pinta como una imagen normal. */
+  .halo {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+      circle closest-side,
+      var(--halo-tint, var(--color-mint-soft)) 0%,
+      color-mix(in srgb, var(--halo-tint, var(--color-mint-soft)) 55%, transparent) 55%,
+      transparent 100%
+    );
+  }
+
+  .section-pad {
+    padding-block: clamp(4.5rem, 10vw, 8.5rem);
+  }
+
+  /* NOTA: se probó `content-visibility: auto` en las secciones y se descartó.
+     Todas las secciones tienen `id` y son destino de los enlaces del header, y
+     con la altura placeholder el navegador calcula mal el destino del ancla:
+     al pulsar "Catálogo" se acaba en medio de otra sección. El coste de pintado
+     que ahorraba ya no es relevante sin los `filter: blur()` de los halos. */
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.35rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    line-height: 1.3;
+    transition: color 0.35s var(--ease-soft);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary:hover {
+    color: var(--color-teal);
+  }
+
+  .faq-icon {
+    position: relative;
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--color-line);
+    transition:
+      background-color 0.4s var(--ease-soft),
+      border-color 0.4s var(--ease-soft),
+      transform 0.5s var(--ease-soft);
+  }
+
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 1.5px;
+    background: var(--color-ink);
+    transform: translate(-50%, -50%);
+    transition: transform 0.45s var(--ease-soft);
+  }
+
+  .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .faq-item[open] .faq-icon {
+    background: var(--color-mint);
+    border-color: var(--color-mint);
+  }
+
+  .faq-item[open] .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .faq-body {
+    padding-bottom: 1.5rem;
+    max-width: 46rem;
+    color: var(--color-ink-70);
+  }
+
+  .link-underline {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.5s var(--ease-soft);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* `backdrop-filter` no se transiciona (es carísimo): se conmuta de golpe y solo
+     se anima el color y la sombra. */
+  [data-header].is-scrolled {
+    background-color: color-mix(in srgb, var(--color-paper) 88%, transparent);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: 0 1px 0 rgb(25 13 13 / 0.07);
+  }
+
+  [data-menu] {
+    transition:
+      opacity 0.45s var(--ease-soft),
+      visibility 0.45s;
+    visibility: hidden;
+  }
+
+  [data-menu].is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  [data-menu].is-open [data-menu-line='top'] {
+    transform: translateY(3px) rotate(45deg);
+  }
+
+  [data-menu].is-open [data-menu-line='bottom'] {
+    transform: translateY(-3px) rotate(-45deg);
+  }
+
+  [data-menu].is-open [data-menu-link] {
+    animation: ama-rise 0.6s var(--ease-soft) both;
+    animation-delay: calc(var(--menu-delay, 0s));
+  }
+
+  .marquee.is-paused {
+    animation-play-state: paused;
+  }
+}
+
+@layer utilities {
+  /*
+     La imagen NO anima opacity: un elemento con opacidad en movimiento no es
+     candidato a LCP hasta que la animación acaba, lo que costaba ~2 s de LCP.
+     Sólo se anima `scale`, que no bloquea el LCP. */
+  [data-hero-media] {
+    scale: 1.12;
+    animation: ama-hero-media 1.5s var(--ease-soft) both;
+  }
+
+  [data-hero-kicker],
+  [data-hero-title],
+  [data-hero-text],
+  [data-hero-actions],
+  [data-hero-meta],
+  [data-hero-cue] {
+    animation: ama-rise 0.85s var(--ease-soft) both;
+    animation-delay: calc(var(--intro-delay, 0s));
+  }
+
+  .line-mask > [data-hero-line] {
+    animation: ama-line 0.95s var(--ease-soft) both;
+    animation-delay: calc(var(--intro-delay, 0s));
+  }
+
+  /*
+     `.js` lo añade un script inline antes del primer pintado; sin JS las
+     transiciones nunca se activan y el contenido se ve siempre. */
+  .js [data-reveal] {
+    opacity: 0;
+    translate: 0 28px;
+    transition:
+      opacity 0.7s var(--ease-soft),
+      translate 0.7s var(--ease-soft);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  .js [data-reveal-rule] {
+    scale: 0 1;
+    transition: scale 0.9s var(--ease-soft);
+  }
+
+  .js [data-reveal].is-in,
+  .js [data-reveal-rule].is-in {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1 1;
+  }
+
+  /* Cita palabra a palabra: los `<span>` se generan en el HTML con `--i`, así que
+     aquí no hay que reescribir el DOM desde JS. */
+  .js [data-reveal-words] span {
+    display: inline-block;
+    opacity: 0;
+    translate: 0 26px;
+    rotate: 2deg;
+    transition:
+      opacity 0.6s var(--ease-soft),
+      translate 0.6s var(--ease-soft),
+      rotate 0.6s var(--ease-soft);
+    transition-delay: calc(var(--i, 0) * 22ms);
+  }
+
+  .js [data-reveal-words].is-in span {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+
+@keyframes ama-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ama-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes ama-blink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.25;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes ama-pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ama-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ama-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes ama-line {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes ama-hero-media {
+  from {
+    scale: 1.16;
+  }
+  to {
+    scale: 1.12;
+  }
+}
+
+.anim-blink {
+  animation: ama-blink 1.6s ease-in-out infinite;
+}
+
+.anim-pulse-ring {
+  animation: ama-pulse-ring 2.6s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* El reveal se queda en su estado final en vez de depender de una clase. */
+  .js [data-reveal],
+  .js [data-reveal-rule],
+  .js [data-reveal-words] span {
+    opacity: 1 !important;
+    translate: none !important;
+    rotate: none !important;
+    scale: none !important;
+  }
+}
