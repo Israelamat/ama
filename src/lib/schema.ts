@@ -35,13 +35,23 @@ const localBusiness = {
   '@type': ['HealthAndBeautyBusiness', 'Store'],
   '@id': `${SITE_URL}/#negocio`,
   name: business.name,
-  alternateName: ['Herbolario en Petrer', 'Herbolistería en Petrer', 'Ama Arte Sana'],
+  alternateName: ['Herbolario en Petrer', 'Herboristería en Petrer', 'Ama Arte Sana'],
   description:
-    'Herbolario y herbolistería en Petrer (Alicante): plantas medicinales, infusiones naturales, suplementos, vitaminas, cosmética natural, productos ecológicos y productos de dietética, además de incienso, minerales, tarot, amuletos y decoración del hogar. Tienda de productos naturales con envío a toda España.',
+    'Herbolario y herboristería en Petrer (Alicante): plantas medicinales, infusiones naturales, suplementos, vitaminas, cosmética natural, productos ecológicos y productos de dietética, además de incienso, minerales, tarot, amuletos y decoración del hogar. Tienda de productos naturales con envío a toda España.',
   url: SITE_URL,
   logo: brand.logoLarge,
   image: brand.ogImage,
   email: business.email,
+  telephone: business.phone,
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: business.phone,
+      contactType: 'customer service',
+      areaServed: 'ES',
+      availableLanguage: ['es'],
+    },
+  ],
   priceRange: '€€',
   currenciesAccepted: 'EUR',
   address: {

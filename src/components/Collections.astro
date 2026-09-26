@@ -9,7 +9,7 @@ import { collections, links, sizes, src, srcset } from '../config/site';
       kicker="El catálogo"
       title="Sección por sección, como nos gusta a nosotras"
       id="catalogo-title"
-      lede="De la herbolistería a los minerales: cada colección de la tienda, con su propio rincón. Pincha en la que te llame y te llevamos directamente."
+      lede="De la herboristería a los minerales: cada colección de la tienda, con su propio rincón. Pincha en la que te llame y te llevamos directamente."
     />
 
     <ul class="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -22,7 +22,7 @@ import { collections, links, sizes, src, srcset } from '../config/site';
             style={`--reveal-delay: ${Math.min(index, 5) * 60}ms`}
             class:list={['card group', collection.featured && 'sm:col-span-2 xl:row-span-2']}
           >
-            <div class:list={['card-media', collection.featured && 'xl:aspect-[4/5]']}>
+            <div class:list={['card-media', collection.featured && 'xl:aspect-4/5']}>
               <img
                 src={src(collection.image)}
                 srcset={srcset(collection.image)}

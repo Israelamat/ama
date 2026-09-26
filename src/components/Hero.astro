@@ -38,12 +38,12 @@ const heroSrcset = srcset(heroMedia, heroSteps);
     aria-hidden="true"
   ></div>
   <div
-    class="halo -left-24 top-[12%] -z-10 h-[420px] w-[420px]"
+    class="halo -left-24 top-[12%] -z-10 h-105 w-105"
     style="--halo-tint: #5dd2b4; opacity: 0.3"
     aria-hidden="true"
   ></div>
   <div
-    class="halo -right-32 bottom-[6%] -z-10 h-[380px] w-[380px]"
+    class="halo -right-32 bottom-[6%] -z-10 h-95 w-95"
     style="--halo-tint: #bdf2eb; opacity: 0.4"
     aria-hidden="true"
   ></div>
@@ -65,14 +65,19 @@ const heroSrcset = srcset(heroMedia, heroSteps);
           Tu herbolario en Petrer
         </span>
       </span>
-      <span class="mt-4 block font-sans text-[clamp(1.05rem,2.6vw,1.9rem)] font-medium leading-[1.35] tracking-[-0.01em] text-ink-70">
-        <span class="line-mask">
-          <span style="--intro-delay: 0.18s" data-hero-line>
-            {brand.hero}
-          </span>
+    </h1>
+
+    <p
+      class="mx-auto mt-4 max-w-5xl font-sans text-[clamp(1.05rem,2.6vw,1.9rem)] font-medium leading-[1.35] tracking-[-0.01em] text-ink-70"
+      style="--intro-delay: 0.06s"
+      data-hero-subtitle
+    >
+      <span class="line-mask">
+        <span style="--intro-delay: 0.18s" data-hero-line>
+          {brand.hero}
         </span>
       </span>
-    </h1>
+    </p>
 
     <p class="lede mx-auto mt-8 max-w-2xl" style="--intro-delay: 0.28s" data-hero-text>
       Productos naturales, plantas medicinales, infusiones, suplementos, vitaminas y cosmética

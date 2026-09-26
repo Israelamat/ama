@@ -1,4 +1,4 @@
-export const SITE_URL = process.env.SITE_URL ?? 'https://landing.amaartesana.com';
+export const SITE_URL = process.env.SITE_URL ?? 'https://amaartesana.vercel.app';
 export const SHOP = 'https://amaartesana.com';
 export const CDN = 'https://amaartesana.com/cdn/shop';
 
@@ -112,6 +112,9 @@ export const brand = {
 export const business = {
   name: 'Ama arte-sana',
   email: 'contactoamaartesana@gmail.com',
+  /** Formato E.164 para `tel:` y schema; sin espacios ni paréntesis. */
+  phone: '+34658552304',
+  phoneDisplay: '658 55 23 04',
   priceMin: '10',
   freeShippingFrom: '80',
   address: {
@@ -296,6 +299,12 @@ export const services: Service[] = [
   {
     title: 'Masajes, reiki y flores de Bach',
     href: links.cursos,
+    image: {
+      base: 'products/relajacion-relax-masajes-esencias-aromaticas-velas-aceites-ama.jpg',
+      w: 1600,
+      h: 1000,
+    },
+    alt: 'Masajes, reiki y flores del Dr. Bach en Ama arte-sana, Petrer',
     text: 'Masaje, reiki, acupuntura y acompañamiento con flores del Dr. Bach para soltar lo que pesa.',
     meta: 'Terapias · A demanda',
     cta: 'Pedir información',
@@ -324,7 +333,7 @@ export const faqs = [
   },
   {
     q: '¿Sois un herbolario en Petrer o en Elda?',
-    a: 'Somos un herbolario y una herbolistería en Petrer, a unos pocos kilómetros de Elda. Petrer y Elda son municipios contiguos, así que venir de Elda a vernos es un paseo de pocos minutos.',
+    a: 'Somos un herbolario y una herboristería en Petrer, y también un herbolario cerca de Elda: estamos a unos pocos kilómetros, porque Petrer y Elda son municipios contiguos. Venir de Elda a vernos es un paseo de pocos minutos.',
   },
   {
     q: '¿Qué productos naturales encontráis?',

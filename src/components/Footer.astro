@@ -38,7 +38,7 @@ const legalLinks = [
 
 <footer class="relative overflow-hidden bg-ink pt-20 pb-10 text-paper">
   <div
-    class="halo -top-40 left-1/2 h-[520px] w-[720px]"
+    class="halo -top-40 left-1/2 h-130 w-180"
     style="--halo-tint: #046b5c; opacity: 0.2"
     aria-hidden="true"
   ></div>
@@ -177,6 +177,11 @@ const legalLinks = [
             {business.hours[0].morning} · {business.hours[0].afternoon}
           </p>
           <p>Sábados {business.hours[1].morning}</p>
+          <p>
+            <a href={`tel:${business.phone}`} class="link-underline">
+              {business.phoneDisplay}
+            </a>
+          </p>
           <p>
             <a href={links.enviarCorreo} class="link-underline">
               {business.email}

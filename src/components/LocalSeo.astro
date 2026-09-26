@@ -2,15 +2,15 @@
 import { business, collections, herbolarioMedia, links, sizes, src, srcset } from '../config/site';
 
 const paragraphs = [
-  'Si buscas un herbolario en Petrer o una herbolistería cerca de ti, ya has llegado. En Ama arte-sana cuidados de ti y de tus emociones con productos naturales seleccionados uno a uno: plantas medicinales, infusiones naturales, suplementos, vitaminas, cosmética natural, productos ecológicos y productos de dietética.',
+  'Si buscas un herbolario en Petrer o una herboristería cerca de ti, ya has llegado. En Ama arte-sana cuidados de ti y de tus emociones con productos naturales seleccionados uno a uno: plantas medicinales, infusiones naturales, suplementos, vitaminas, cosmética natural, productos ecológicos y productos de dietética.',
   'Somos una tienda de productos naturales en el corazón de Petrer (Alicante), en la Avenida de Elda 68. También somos el herbolario más cómodo para quien viene de Elda: los dos pueblos están pegados y en cinco minutos estás en la puerta. Atendemos igual a clientes de Villena, Caudete y Biar, y enviamos a toda España.',
-  'Y junto a la herbolistería encontrarás incienso y sahumerios, minerales y piedras, cartas de tarot y oráculos, amuletos, velas, colonias espirituales y decoración del hogar. Si lo que buscas es acompañamiento, hacemos constelaciones familiares, reiki, flores de Bach, cursos y talleres.',
+  'Y junto a la herboristería encontrarás incienso y sahumerios, minerales y piedras, cartas de tarot y oráculos, amuletos, velas, colonias espirituales y decoración del hogar. Si lo que buscas es acompañamiento, hacemos constelaciones familiares, reiki, flores de Bach, cursos y talleres.',
 ];
 ---
 
 <section id="herbolario" class="section-pad relative overflow-hidden bg-paper">
   <div
-    class="halo top-10 -right-40 h-[520px] w-[520px]"
+    class="halo top-10 -right-40 h-130 w-130"
     style="--halo-tint: #bdf2eb; opacity: 0.3"
     aria-hidden="true"
   ></div>
@@ -18,7 +18,7 @@ const paragraphs = [
   <div class="wrap relative grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
     <div>
       <p class="kicker" data-reveal>
-        Herbolario y herbolistería
+        Herbolario y herboristería
       </p>
       <h2 id="local-title" class="display-lg mt-5" data-reveal>
         Tu herbolario en Petrer, a un paso de Elda
@@ -50,7 +50,7 @@ const paragraphs = [
 
     <aside class="lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:self-start" data-reveal>
       <div class="overflow-hidden rounded-[var(--radius-card)] border border-line bg-card">
-        <div class="relative aspect-[16/10] overflow-hidden">
+        <div class="relative aspect-16/10 overflow-hidden">
           <img
             src={src(herbolarioMedia)}
             srcset={srcset(herbolarioMedia)}
@@ -109,7 +109,11 @@ const paragraphs = [
           </div>
 
           <p class="mt-6 text-sm text-ink-50">
-            ¿Prefieres que te atendamos en la tienda? Escríbenos a
+            ¿Prefieres que te atendamos en la tienda? Llámanos al{' '}
+            <a href={`tel:${business.phone}`} class="link-underline text-teal">
+              {business.phoneDisplay}
+            </a>{' '}
+            o escríbenos a{' '}
             <a href={links.enviarCorreo} class="link-underline text-teal">
               {business.email}
             </a>

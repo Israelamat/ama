@@ -6,7 +6,7 @@ const osmEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${busines
 
 <section id="visitanos" class="section-pad relative overflow-hidden bg-paper-2">
   <div
-    class="halo -top-24 -left-32 h-[420px] w-[420px]"
+    class="halo -top-24 -left-32 h-105 w-105"
     style="--halo-tint: #bdf2eb; opacity: 0.35"
     aria-hidden="true"
   ></div>
@@ -54,6 +54,9 @@ const osmEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${busines
             ↗
           </span>
         </a>
+        <a href={`tel:${business.phone}`} class="btn btn-ghost">
+          {business.phoneDisplay}
+        </a>
         <a href={links.enviarCorreo} class="btn btn-ghost">
           {business.email}
         </a>
@@ -63,7 +66,7 @@ const osmEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${busines
     <div data-reveal class="relative">
       <div
         data-map-facade
-        class="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-card)] border border-line bg-card"
+        class="relative aspect-4/3 w-full overflow-hidden rounded-[var(--radius-card)] border border-line bg-card"
       >
         <div class="absolute inset-0 grid place-items-center" aria-hidden="true">
           <div class="map-grid absolute inset-0"></div>
