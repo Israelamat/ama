@@ -14,7 +14,7 @@
 A single-page marketing site that works as the **brand and local-SEO front door** for a
 physical shop, and funnels every visitor into the client's existing Shopify store.
 
-**Live:** [hola.amaartesana.com](https://hola.amaartesana.com) → store: [amaartesana.com](https://amaartesana.com)
+**Live:** [landing.amaartesana.com](https://landing.amaartesana.com) → store: [amaartesana.com](https://amaartesana.com)
 
 ---
 
@@ -227,7 +227,9 @@ animations respect `prefers-reduced-motion`.
 ```
 .
 ├── astro.config.mjs          # Static output, sitemap, Tailwind via Vite
-├── public/                   # Favicons, web manifest, robots.txt
+├── vercel.json               # Vercel build, caching and security headers
+├── .nvmrc                    # Node 22 (required by pnpm 11)
+├── public/                   # Favicons and web manifest
 └── src/
     ├── components/           # One Astro component per page section
     │   ├── Header.astro      #   Fixed nav + full-screen mobile menu
@@ -251,7 +253,8 @@ animations respect `prefers-reduced-motion`.
     │   └── schema.ts         # JSON-LD graph builder
     ├── pages/
     │   ├── index.astro       # The landing page
-    │   └── 404.astro
+    │   ├── 404.astro
+    │   └── robots.txt.ts      # Sitemap URL, generated at build time
     ├── scripts/
     │   ├── motion.ts         # Reveals, header state, marquee pausing
     │   └── ui.ts             # Menu, focus trap, hand-off, newsletter, map
@@ -272,8 +275,9 @@ require touching layout code.
 
 ## Getting started
 
-**Requirements:** [Node.js](https://nodejs.org) `>= 20.11.0` and
-[pnpm](https://pnpm.io).
+**Requirements:** [Node.js](https://nodejs.org) `>= 22.0.0` and
+[pnpm](https://pnpm.io) `11` (both pinned via `engines` and `packageManager`; pnpm 11
+drops Node 20 support).
 
 ```bash
 pnpm install     # install dependencies
@@ -334,16 +338,65 @@ upscaled.
 
 ## Deployment
 
-The project builds to a fully static `dist/`, so it can be deployed to any static host
-— Vercel, Netlify, Cloudflare Pages, GitHub Pages, or plain nginx.
+The project builds to a fully static `dist/`. It is configured for
+[Vercel](https://vercel.com) in `vercel.json`, but the output is plain files, so it will
+also work on Netlify, Cloudflare Pages, GitHub Pages or plain nginx.
 
 ```bash
 pnpm build   # → dist/
 ```
 
-Set the production origin in `astro.config.mjs` (`site`) and in
-`src/config/site.ts` (`SITE_URL`). Both must stay in sync, because the sitemap and all
-canonical URLs and JSON-LD `@id`s are derived from them.
+### The `SITE_URL` environment variable
+
+The canonical origin is read from `SITE_URL`, falling back to
+`https://landing.amaartesana.com` when it is not set:
+
+| File                      | Used for                                          |
+| ------------------------- | ------------------------------------------------- |
+| `astro.config.mjs`        | `site` — drives the generated sitemap             |
+| `src/config/site.ts`      | canonical links, `og:url` and every JSON-LD `@id` |
+| `src/pages/robots.txt.ts` | the `Sitemap:` line, so it can never drift        |
+
+Set it in Vercel under **Project → Settings → Environment Variables** so a wrong domain
+can never ship:
+
+```
+SITE_URL=https://landing.amaartesana.com
+```
+
+Preview deployments pick it up automatically, which keeps canonical URLs honest on
+every branch build.
+
+### Deploying to Vercel
+
+1. Push this repository to GitHub.
+2. In Vercel, choose **Add New → Project** and import the repository. Vercel reads
+   `vercel.json`, so nothing else needs configuring.
+3. Add the `SITE_URL` environment variable for **Production** (leave **Preview** empty
+   if you do not want previews indexed).
+4. Click **Deploy**. Vercel builds with `pnpm build` and publishes `dist/`.
+5. Attach the custom domain under **Project → Settings → Domains** →
+   `landing.amaartesana.com`.
+
+Every push to the default branch redeploys automatically; other branches get preview
+URLs.
+
+### What `vercel.json` handles
+
+- **Build** — framework, install command, build command and output directory pinned
+  explicitly, so the build never depends on framework auto-detection.
+- **Caching** — `/_astro/*` is served `immutable` for one year, which is safe because
+  Astro content-hashes those filenames. Icons get a one-day cache.
+- **Security headers** — `nosniff`, `Referrer-Policy`, `X-Frame-Options`,
+  `Permissions-Policy` and HSTS. No Content-Security-Policy is set: it would need
+  allowances for the inline JSON-LD, the inline `js`-class script, the OpenStreetMap
+  iframe and the outbound Shopify links, and a missed allowance breaks the page
+  silently.
+- **No rewrites.** Vercel does not support URL rewrites with Astro, so `/404` stays a
+  genuine `404.html`.
+
+`robots.txt` is generated during the build by `src/pages/robots.txt.ts` rather than
+being a static file, so its sitemap URL always matches `SITE_URL`.
 
 ---
 

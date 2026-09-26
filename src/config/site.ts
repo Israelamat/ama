@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://hola.amaartesana.com';
+export const SITE_URL = process.env.SITE_URL ?? 'https://landing.amaartesana.com';
 export const SHOP = 'https://amaartesana.com';
 export const CDN = 'https://amaartesana.com/cdn/shop';
 

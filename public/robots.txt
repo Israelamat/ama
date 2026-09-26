@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hola.amaartesana.com/sitemap-index.xml

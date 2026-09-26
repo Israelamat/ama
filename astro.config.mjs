@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://hola.amaartesana.com',
+  site: process.env.SITE_URL ?? 'https://landing.amaartesana.com',
   trailingSlash: 'never',
   build: {
     inlineStylesheets: 'auto',
